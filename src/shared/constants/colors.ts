@@ -11,6 +11,8 @@ export interface ThemeColors {
   onBackground: string;
   onSurface: string;
   onError: string;
+  tabIcon: string;
+  tabIconActive: string;
 }
 
 export const Colors: { dark: ThemeColors; light: ThemeColors } = {
@@ -22,11 +24,13 @@ export const Colors: { dark: ThemeColors; light: ThemeColors } = {
     background: "#ffffff", // 배경색
     surface: "#ffffff", // 표면색
     error: "#b00020", // 에러 색상
-    onPrimary: "#ffffff", // 주요 색상 위에 표시될 텍스트 등 반대 색상
+    onPrimary: "#d9d9d9", // 주요 색상 위에 표시될 텍스트 등 반대 색상
     onSecondary: "#000000", // 보조 색상 위에 표시될 텍스트 등 반대 색상
-    onBackground: "#000000", // 배경 위에 표시될 텍스트 등 반대 색상
+    onBackground: "#111111", // 배경 위에 표시될 텍스트 등 반대 색상
     onSurface: "#000000", // 표면 위에 표시될 텍스트 등 반대 색상
-    onError: "#ffffff", // 에러 색상 위에 표시될 텍스트 등 반대 색상
+    onError: "#d9d9d9", // 에러 색상 위에 표시될 텍스트 등 반대 색상
+    tabIcon: "#d9d9d9",
+    tabIconActive: "red",
   },
   dark: {
     primary: "#bb86fc",
@@ -38,8 +42,10 @@ export const Colors: { dark: ThemeColors; light: ThemeColors } = {
     error: "#cf6679",
     onPrimary: "#000000",
     onSecondary: "#000000",
-    onBackground: "#ffffff",
-    onSurface: "#ffffff",
+    onBackground: "#d9d9d9",
+    onSurface: "#d9d9d9",
     onError: "#000000",
+    tabIcon: "#d9d9d9",
+    tabIconActive: "red",
   },
 };

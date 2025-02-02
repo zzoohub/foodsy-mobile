@@ -2,7 +2,7 @@ import { Text, View } from "@/shared/ui";
 import { Link, Stack } from "expo-router";
 import { StyleSheet } from "react-native";
 
-export const NotFoundScreen = () => {
+export default function Page() {
   return (
     <>
       <Stack.Screen options={{ title: "Oops!" }} />
@@ -14,7 +14,7 @@ export const NotFoundScreen = () => {
       </View>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

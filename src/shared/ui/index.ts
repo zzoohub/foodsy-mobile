@@ -1,4 +1,6 @@
-export { Text } from "./Text";
-export { View } from "./View";
-export { ExternalLink } from "./ExternalLink";
-export { Haptic } from "./Haptic";
+export { Text } from "./extended/Text";
+export { View } from "./extended/View";
+export { ExternalLink } from "./extended/ExternalLink";
+
+export { Header } from "./header/Header";
+export { HeaderGoBack } from "./header/HeaderGoBack";
