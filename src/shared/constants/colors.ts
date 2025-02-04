@@ -30,7 +30,7 @@ export const Colors: { dark: ThemeColors; light: ThemeColors } = {
     onSurface: "#000000", // 표면 위에 표시될 텍스트 등 반대 색상
     onError: "#d9d9d9", // 에러 색상 위에 표시될 텍스트 등 반대 색상
     tabIcon: "#d9d9d9",
-    tabIconActive: "red",
+    tabIconActive: "#333333",
   },
   dark: {
     primary: "#bb86fc",

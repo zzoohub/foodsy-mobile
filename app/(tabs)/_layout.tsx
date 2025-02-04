@@ -9,6 +9,7 @@ export default function Layout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarInactiveTintColor: Colors[colorScheme].tabIcon,
         tabBarActiveTintColor: Colors[colorScheme].tabIconActive,
         headerShown: false,
       }}

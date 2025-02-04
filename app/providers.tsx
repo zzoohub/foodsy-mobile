@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export default function Routes({ children }: { children: ReactNode }) {
   return (
     <QueryProvider>
-      <ThemeProvider>{children}</ThemeProvider>;
+      <ThemeProvider>{children}</ThemeProvider>
     </QueryProvider>
   );
 }
