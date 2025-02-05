@@ -22,7 +22,15 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="dashboard"
+        name="create-post"
+        options={{
+          title: "",
+          tabBarIcon: ({ color }) => <Entypo name="squared-plus" size={24} color={color} />,
+          // tabBarButton: props => <TouchableOpacity {...(props as any)} onPress={() => {}} />,
+        }}
+      />
+      <Tabs.Screen
+        name="mypage"
         options={{
           title: "",
           tabBarIcon: ({ color }) => <FontAwesome name="user" size={24} color={color} />,

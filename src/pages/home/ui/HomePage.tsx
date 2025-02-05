@@ -37,7 +37,7 @@ export const HomePage = () => {
                   // 수직 이동이 일정 임계치를 넘으면 제스처를 실패시키도록 합니다.
                   failOffsetY: [-10, 10],
                   // (선택사항) 수평 이동에 대한 활성 임계값도 조정해볼 수 있습니다.
-                  activeOffsetX: [-5, 5],
+                  activeOffsetX: [-10, 10],
                 }}
                 renderItem={({ index }) => (
                   <View style={[styles.post_image_container, { width }]}>
@@ -49,10 +49,10 @@ export const HomePage = () => {
                   </View>
                 )}
               />
-              <View style={styles.post_reactions}>
+              {/* <View style={styles.post_reactions}>
                 <FontAwesome name="heart-o" size={18} color="black" />
                 <Text style={{ fontSize: 14 }}>1 likes</Text>
-              </View>
+              </View> */}
               <View style={styles.post_contents}>
                 <Text style={{ fontSize: 14 }}>contents.........</Text>
               </View>

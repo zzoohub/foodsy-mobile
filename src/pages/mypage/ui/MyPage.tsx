@@ -1,9 +1,9 @@
 import { Text, View } from "@/shared/ui";
 
-export const Dashboard = () => {
+export const MyPage = () => {
   return (
     <View>
-      <Text>Dashboard</Text>
+      <Text>MyPage</Text>
     </View>
   );
 };
