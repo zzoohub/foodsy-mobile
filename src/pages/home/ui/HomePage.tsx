@@ -43,7 +43,7 @@ export const HomePage = () => {
                   <View style={[styles.post_image_container, { width }]}>
                     <Image
                       source={require("~/assets/images/react-logo.png")}
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "100%", height: "100%", backgroundColor: "red" }}
                       resizeMode="contain"
                     />
                   </View>
