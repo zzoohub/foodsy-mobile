@@ -1,26 +1,27 @@
 import { Spacing, Text, useFunnel, View } from "@/shared/ui";
 import { StyleSheet } from "react-native";
-import { Camera } from "./Camera";
+import { ChooseImages } from "./ChooseImages";
+import { CreatePostForm } from "./CreatePostForm";
+
+export type CreatePostSteps = ("choose-images" | "form")[];
+export interface CreatePostState extends Record<string, unknown> {
+  images: string[];
+}
 
 export const CreatePostPage = () => {
-  const [Funnel, state, setState] = useFunnel(["album", "camera", "form"]).withState({ im: "" });
+  const [Funnel, state, setState] = useFunnel<CreatePostSteps, CreatePostState>(["choose-images", "form"]).withState({
+    images: [],
+  });
 
   return (
     <>
       <Spacing height={50} />
       <Funnel>
-        <Funnel.Step name="album">
-          <View>
-            <Text onPress={() => setState({ step: "camera" })}>앨범</Text>
-          </View>
-        </Funnel.Step>
-        <Funnel.Step name="camera">
-          <Camera onTakePicture={image => setState({ step: "form", image })} />
+        <Funnel.Step name="choose-images">
+          <ChooseImages setState={setState} state={state} />
         </Funnel.Step>
         <Funnel.Step name="form">
-          <View>
-            <Text>폼</Text>
-          </View>
+          <CreatePostForm setState={setState} state={state} />
         </Funnel.Step>
       </Funnel>
     </>
