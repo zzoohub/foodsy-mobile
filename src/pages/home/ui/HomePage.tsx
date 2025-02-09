@@ -49,10 +49,10 @@ export const HomePage = () => {
                   </View>
                 )}
               />
-              {/* <View style={styles.post_reactions}>
+              <View style={styles.post_reactions}>
                 <FontAwesome name="heart-o" size={18} color="black" />
                 <Text style={{ fontSize: 14 }}>1 likes</Text>
-              </View> */}
+              </View>
               <View style={styles.post_contents}>
                 <Text style={{ fontSize: 14 }}>contents.........</Text>
               </View>
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 7,
     paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   post_images: {},
   post_reactions: {
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 6,
     paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   post_contents: {
     flexDirection: "row",
