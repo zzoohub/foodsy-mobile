@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, Dimensions } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FunnelSetState } from "@/shared/ui/toolkit/funnel/model/type";
 import { CreatePostSteps, CreatePostState } from "./CreatePostPage";
+import { Text, View } from "@/shared/ui";
 
 interface Props {
   setState: FunnelSetState<CreatePostSteps, CreatePostState>;
@@ -66,14 +67,16 @@ export const ChooseImages = ({ setState, state }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>이미지 선택</Text>
+      <Text type="subtitle" style={styles.title}>
+        이미지 선택
+      </Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={pickImage}>
-          <MaterialIcons name="photo-library" size={40} color="#4a4a4a" />
+          <MaterialIcons name="photo-library" size={40} />
           <Text style={styles.buttonText}>앨범에서 선택</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={takePhoto}>
-          <MaterialIcons name="camera-alt" size={40} color="#4a4a4a" />
+          <MaterialIcons name="camera-alt" size={40} />
           <Text style={styles.buttonText}>카메라로 촬영</Text>
         </TouchableOpacity>
       </View>
@@ -93,16 +96,12 @@ const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
     marginBottom: 20,
-    color: "#333",
   },
   buttonContainer: {
     flexDirection: "row",
@@ -111,14 +110,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#fff",
     borderRadius: 10,
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
     width: windowWidth * 0.4,
     height: windowWidth * 0.4,
-    shadowColor: "#000",
+    backgroundColor: "#fff",
+    shadowColor: "#666666",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     marginTop: 10,
-    color: "#4a4a4a",
     textAlign: "center",
   },
   image: {
@@ -142,21 +140,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f0f0f0",
   },
   permissionText: {
     fontSize: 18,
-    color: "#333",
     marginBottom: 10,
   },
   permissionButton: {
-    backgroundColor: "#007AFF",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   permissionButtonText: {
-    color: "#fff",
     fontSize: 16,
   },
 });
