@@ -39,8 +39,8 @@ export const HomePage = () => {
                   // (선택사항) 수평 이동에 대한 활성 임계값도 조정해볼 수 있습니다.
                   activeOffsetX: [-10, 10],
                 }}
-                renderItem={({ index }) => (
-                  <View style={[styles.post_image_container, { width }]}>
+                renderItem={({ index }: { index: number }) => (
+                  <View style={[styles.post_image_container, { width }]} key={index}>
                     <Image
                       source={require("~/assets/images/react-logo.png")}
                       style={{ width: "100%", height: "100%", backgroundColor: "red" }}
