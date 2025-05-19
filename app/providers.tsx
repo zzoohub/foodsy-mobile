@@ -1,10 +1,6 @@
-import { ThemeProvider, QueryProvider } from "@/shared/providers";
 import { ReactNode } from "react";
 
-export default function Routes({ children }: { children: ReactNode }) {
-  return (
-    <QueryProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </QueryProvider>
-  );
+// We could add theme providers, authentication providers, etc. here
+export default function Providers({ children }: { children: ReactNode }) {
+  return children;
 }

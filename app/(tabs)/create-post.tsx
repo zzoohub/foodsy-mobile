@@ -1,5 +1,5 @@
-import { CreatePostPage } from "@/pages/create-post";
+import { CreatePostPage } from "@/domains/post";
 
-export default function Page() {
+export default function CreatePost() {
   return <CreatePostPage />;
 }

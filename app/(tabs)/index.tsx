@@ -1,5 +1,5 @@
-import { HomePage } from "@/pages/home";
+import { HomePage } from "@/domains/post";
 
-export default function Page() {
+export default function Home() {
   return <HomePage />;
 }

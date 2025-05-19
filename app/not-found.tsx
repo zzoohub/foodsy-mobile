@@ -1,18 +1,19 @@
-import { Text, View } from "@/shared/ui";
+import { Text, View } from "@/components/core";
 import { Link, Stack } from "expo-router";
+import { Fragment } from "react";
 import { StyleSheet } from "react-native";
 
-export default function Page() {
+export default function NotFound() {
   return (
-    <>
+    <Fragment>
       <Stack.Screen options={{ title: "Oops!" }} />
       <View style={styles.container}>
-        <Text type="title">This screen doesn't exist.</Text>
+        <Text style={styles.title}>This screen doesn't exist.</Text>
         <Link href="/" style={styles.link}>
-          <Text type="link">Go to home screen!</Text>
+          <Text style={styles.linkText}>Go to home screen!</Text>
         </Link>
       </View>
-    </>
+    </Fragment>
   );
 }
 
@@ -23,8 +24,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   link: {
     marginTop: 15,
     paddingVertical: 15,
+  },
+  linkText: {
+    color: "#2e78b7",
   },
 });

@@ -1,5 +1,5 @@
-import { MyPage } from "@/pages/mypage";
+import { ProfilePage } from "@/domains/user";
 
-export default function Page() {
-  return <MyPage />;
+export default function Profile() {
+  return <ProfilePage />;
 }

@@ -1,3 +1,77 @@
+# Foodsy Mobile App
+
+A mobile application for food sharing and social interaction.
+
+## Project Structure
+
+The project follows a domain-driven design approach with the following structure:
+
+```
+src/
+├── components/       # Shared UI components
+│   └── core/         # Core UI components (Text, View, etc.)
+├── hooks/            # Shared hooks
+├── utils/            # Utility functions
+├── lib/              # Third-party library wrappers
+├── stores/           # Global state management with Zustand
+└── domains/          # Feature domains
+    ├── post/         # Post-related features
+    │   ├── components/
+    │   ├── hooks/
+    │   └── utils/
+    ├── user/         # User-related features
+    │   ├── components/
+    │   ├── hooks/
+    │   └── utils/
+    └── search/       # Search-related features
+        ├── components/
+        ├── hooks/
+        └── utils/
+```
+
+## Routing
+
+This app uses Expo Router for navigation:
+
+- `app/` - Contains all the routing configuration
+  - `(tabs)/` - Tab-based navigation (Home, Create Post, Profile)
+  - `_layout.tsx` - Root layout configuration
+
+## Key Design Principles
+
+1. **Domain-driven organization**: Code is organized by feature/domain rather than by type
+2. **Component composition**: Components use composition over props drilling
+3. **Single responsibility**: Each file has a clear, single purpose
+4. **Descriptive naming**: Avoiding ambiguity with clear, descriptive names
+
+## Getting Started
+
+1. Install dependencies:
+
+```bash
+pnpm install
+```
+
+2. Start the development server:
+
+```bash
+pnpm dev
+```
+
+## Development
+
+- **Adding a new feature**: Create a new directory under the appropriate domain
+- **Shared functionality**: Add to the appropriate shared directory (components, hooks, utils)
+- **Global state**: Use Zustand stores in the stores directory
+
+## Best Practices
+
+- Follow the Toss Frontend Guidelines
+- Use descriptive variable names
+- Create focused, single-responsibility components
+- Keep state at the appropriate level
+- Abstract implementation details into dedicated components
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).

@@ -1,39 +1,41 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { Colors } from "@/shared/constants";
-import { useColorScheme } from "@/shared/hooks";
-import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { useColorScheme } from "react-native";
 
-export default function Layout() {
+/**
+ * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+ */
+function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["name"]; color: string }) {
+  return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
+}
+
+export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarInactiveTintColor: Colors[colorScheme].tabIcon,
-        tabBarActiveTintColor: Colors[colorScheme].tabIconActive,
-        headerShown: false,
-      }}
-    >
+    <Tabs screenOptions={{ tabBarActiveTintColor: "#0066FF" }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: "",
-          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
+          title: "Home",
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="create-post"
         options={{
-          title: "",
-          tabBarIcon: ({ color }) => <Entypo name="squared-plus" size={24} color={color} />,
-          // tabBarButton: props => <TouchableOpacity {...(props as any)} onPress={() => {}} />,
+          title: "Post",
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="plus-square-o" color={color} />,
         }}
       />
       <Tabs.Screen
         name="mypage"
         options={{
-          title: "",
-          tabBarIcon: ({ color }) => <FontAwesome name="user" size={24} color={color} />,
+          title: "Profile",
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </Tabs>
