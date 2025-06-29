@@ -3,8 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert, Dimensions, StatusBar 
 import { CameraView, CameraType, FlashMode, useCameraPermissions } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
-
 interface TakePictureProps {
   onPhotoTaken?: (uri: string) => void;
   onClose?: () => void;
