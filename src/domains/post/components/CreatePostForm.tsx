@@ -1,4 +1,3 @@
-import React from "react";
 import { FunnelSetState } from "@/components/utils/funnel/model";
 import { Image, SafeAreaView, View, TextInput, Button, Text } from "react-native";
 import { CreatePostParams, CreatePostSteps } from "~/app/(tabs)/create-post";
@@ -38,7 +37,6 @@ export function CreatePostForm({
   return (
     <SafeAreaView>
       <View>
-        <Button title="나중에 작성하기" />
         <View>
           {state.images.map(image => (
             <Image

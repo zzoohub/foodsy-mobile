@@ -3,6 +3,7 @@ import { useFunnel } from "@/components/utils";
 import { useRouter } from "expo-router";
 import { Text, StyleSheet } from "react-native";
 import { CreatePostForm } from "@/domains/post";
+import { useState } from "react";
 
 export type CreatePostSteps = ["take-picture", "form"];
 export interface CreatePostParams extends Record<string, unknown> {
@@ -17,7 +18,8 @@ export interface CreatePostParams extends Record<string, unknown> {
   calories?: number;
 }
 export default function CreatePostPage() {
-  const [Funnel, state, setState] = useFunnel<CreatePostSteps, CreatePostParams>(["take-picture", "form"]).withState({
+  const router = useRouter();
+  const [state, setState] = useState<CreatePostParams>({
     images: [],
     location: {
       latitude: 0,
@@ -25,18 +27,7 @@ export default function CreatePostPage() {
     },
   });
 
-  const router = useRouter();
-
-  return (
-    <Funnel>
-      <Funnel.Step name="take-picture">
-        <TakePicture onClose={() => router.push("/")} setState={setState} />
-      </Funnel.Step>
-      <Funnel.Step name="form">
-        <CreatePostForm state={state} setState={setState} />
-      </Funnel.Step>
-    </Funnel>
-  );
+  return <TakePicture onClose={() => router.push("/")} setState={setState} />;
 }
 
 const styles = StyleSheet.create({

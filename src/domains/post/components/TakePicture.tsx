@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Dimensions, StatusBar } from "react-native";
 import { CameraView, CameraType, FlashMode, useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
@@ -7,7 +7,7 @@ import { CreatePostParams, CreatePostSteps } from "~/app/(tabs)/create-post";
 import { FunnelSetState } from "@/components/utils/funnel/model";
 
 interface TakePictureProps {
-  setState: FunnelSetState<CreatePostSteps, CreatePostParams>;
+  setState: Dispatch<SetStateAction<CreatePostParams>>;
   onClose?: () => void;
 }
 
