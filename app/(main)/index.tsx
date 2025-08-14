@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Text,
 } from 'react-native';
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
+// Removed gesture handlers to prevent conflicts with scrolling
 import * as Haptics from 'expo-haptics';
 
 // Import orbital sections
@@ -37,93 +37,8 @@ export default function OrbitalNavigation() {
   const translateX = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
   const scale = useRef(new Animated.Value(1)).current;
-  const opacity = useRef(new Animated.Value(1)).current;
 
-  // Gesture handling for orbital navigation
-  const panGesture = Gesture.Pan()
-    .onUpdate((event) => {
-      // Don't allow gestures during camera capture or when in overview mode
-      if (activeSection === OrbitalSection.Camera || isOverview) {
-        return;
-      }
-      
-      translateX.setValue(event.translationX);
-      translateY.setValue(event.translationY);
-    })
-    .onEnd((event) => {
-      const { translationX, translationY, velocityX, velocityY } = event;
-      
-      // Don't allow navigation during camera capture or overview mode
-      if (activeSection === OrbitalSection.Camera || isOverview) {
-        // Reset animation values
-        Animated.parallel([
-          Animated.spring(translateX, { toValue: 0, useNativeDriver: true }),
-          Animated.spring(translateY, { toValue: 0, useNativeDriver: true }),
-        ]).start();
-        return;
-      }
-      
-      // Determine gesture direction and threshold
-      const threshold = 80; // Increased threshold to prevent accidental navigation
-      const velocityThreshold = 800; // Increased velocity threshold
-      
-      let nextSection = activeSection;
-      
-      // Swipe detection with velocity consideration
-      if (Math.abs(translationX) > Math.abs(translationY)) {
-        // Horizontal swipe
-        if (translationX > threshold || velocityX > velocityThreshold) {
-          // Swipe right
-          nextSection = OrbitalSection.Social;
-        } else if (translationX < -threshold || velocityX < -velocityThreshold) {
-          // Swipe left  
-          nextSection = OrbitalSection.AICoach;
-        }
-      } else {
-        // Vertical swipe
-        if (translationY > threshold || velocityY > velocityThreshold) {
-          // Swipe down
-          nextSection = OrbitalSection.Progress;
-        } else if (translationY < -threshold || velocityY < -velocityThreshold) {
-          // Swipe up
-          nextSection = OrbitalSection.Discover;
-        }
-      }
-      
-      // Only navigate if we have a valid next section and it's different from current
-      if (nextSection !== activeSection && Object.values(OrbitalSection).includes(nextSection)) {
-        navigateToSection(nextSection);
-      }
-      
-      // Reset animation values
-      Animated.parallel([
-        Animated.spring(translateX, { toValue: 0, useNativeDriver: true }),
-        Animated.spring(translateY, { toValue: 0, useNativeDriver: true }),
-      ]).start();
-    });
-
-  // Pinch gesture for overview mode
-  const pinchGesture = Gesture.Pinch()
-    .onUpdate((event) => {
-      scale.setValue(event.scale);
-    })
-    .onEnd((event) => {
-      if (event.scale < 0.8) {
-        // Show overview
-        setIsOverview(true);
-        Animated.timing(scale, {
-          toValue: 0.7,
-          duration: 300,
-          useNativeDriver: true,
-        }).start();
-      } else {
-        // Return to normal
-        Animated.spring(scale, {
-          toValue: 1,
-          useNativeDriver: true,
-        }).start();
-      }
-    });
+  // Removed gesture handling to prevent conflicts with ScrollView components
 
   const navigateToSection = (section: OrbitalSection) => {
     if (section === activeSection || isOverview) return;
@@ -140,29 +55,12 @@ export default function OrbitalNavigation() {
       console.warn('Haptics feedback failed:', error);
     }
     
-    // Fade transition
-    Animated.sequence([
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 150,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacity, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }),
-    ]).start();
-    
+    // Instant section change to prevent flickering
     setActiveSection(section);
   };
 
   const exitOverview = () => {
     setIsOverview(false);
-    Animated.spring(scale, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
   };
 
   const renderActiveSection = () => {
@@ -256,40 +154,40 @@ export default function OrbitalNavigation() {
   };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        <GestureDetector gesture={Gesture.Race(panGesture, pinchGesture)}>
-          <Animated.View 
-            style={[
-              styles.content,
-              {
-                transform: [
-                  { translateX },
-                  { translateY },
-                  { scale },
-                ],
-                opacity,
-              },
-            ]}
-          >
-            {renderActiveSection()}
-            {renderOverview()}
-          </Animated.View>
-        </GestureDetector>
+    <SafeAreaView style={styles.container}>
+        <Animated.View 
+          style={[
+            styles.content,
+            {
+              transform: [
+                { translateX },
+                { translateY },
+                { scale },
+              ],
+            },
+          ]}
+        >
+          {renderActiveSection()}
+          {renderOverview()}
+        </Animated.View>
 
         {/* Floating Notifications */}
         <FloatingNotifications />
 
         {/* Section Indicator */}
         <View style={styles.sectionIndicator}>
-          <View style={[styles.indicator, activeSection === OrbitalSection.Discover && styles.indicatorActive]} />
-          <View style={[styles.indicator, activeSection === OrbitalSection.AICoach && styles.indicatorActive]} />
-          <View style={[styles.centerIndicator, activeSection === OrbitalSection.Camera && styles.indicatorActive]} />
-          <View style={[styles.indicator, activeSection === OrbitalSection.Social && styles.indicatorActive]} />
-          <View style={[styles.indicator, activeSection === OrbitalSection.Progress && styles.indicatorActive]} />
+          <TouchableOpacity onPress={() => setIsOverview(!isOverview)} style={styles.overviewToggle}>
+            <Text style={styles.overviewToggleText}>{isOverview ? 'Close' : 'Overview'}</Text>
+          </TouchableOpacity>
+          <View style={styles.indicators}>
+            <View style={[styles.indicator, activeSection === OrbitalSection.Discover && styles.indicatorActive]} />
+            <View style={[styles.indicator, activeSection === OrbitalSection.AICoach && styles.indicatorActive]} />
+            <View style={[styles.centerIndicator, activeSection === OrbitalSection.Camera && styles.indicatorActive]} />
+            <View style={[styles.indicator, activeSection === OrbitalSection.Social && styles.indicatorActive]} />
+            <View style={[styles.indicator, activeSection === OrbitalSection.Progress && styles.indicatorActive]} />
+          </View>
         </View>
-      </SafeAreaView>
-    </GestureHandlerRootView>
+    </SafeAreaView>
   );
 }
 
@@ -351,6 +249,21 @@ const styles = StyleSheet.create({
     bottom: 50,
     left: 0,
     right: 0,
+    alignItems: 'center',
+  },
+  overviewToggle: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 16,
+    marginBottom: 8,
+  },
+  overviewToggleText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  indicators: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

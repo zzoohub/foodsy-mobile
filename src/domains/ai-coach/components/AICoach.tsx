@@ -234,9 +234,9 @@ export default function AICoach({ onNavigate, isActive }: AICoachProps) {
       {/* Insights Section */}
       <Animated.View style={[styles.insightsSection, { opacity: fadeAnim }]}>
         <Text style={styles.sectionTitle}>Today's Insights</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {mockInsights.map(renderInsight)}
-        </ScrollView>
+        <View style={styles.insightsRow}>
+          {mockInsights.slice(0, 2).map(renderInsight)}
+        </View>
       </Animated.View>
 
       {/* Chat Messages */}
@@ -286,8 +286,8 @@ export default function AICoach({ onNavigate, isActive }: AICoachProps) {
         </View>
         
         {/* Quick Actions */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.quickActions}>
-          {['Weekly Report', 'Meal Ideas', 'Goal Check', 'Nutrition Tips'].map((action, index) => (
+        <View style={styles.quickActions}>
+          {['Weekly Report', 'Meal Ideas', 'Goal Check'].map((action, index) => (
             <TouchableOpacity
               key={index}
               style={styles.quickActionButton}
@@ -296,7 +296,7 @@ export default function AICoach({ onNavigate, isActive }: AICoachProps) {
               <Text style={styles.quickActionText}>{action}</Text>
             </TouchableOpacity>
           ))}
-        </ScrollView>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -341,8 +341,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderRadius: 12,
     padding: 12,
-    marginRight: 12,
-    width: 280,
+    flex: 1,
+    marginHorizontal: 4,
   },
   insightHeader: {
     flexDirection: 'row',
@@ -507,13 +507,20 @@ const styles = StyleSheet.create({
   },
   quickActions: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  insightsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   quickActionButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 16,
-    marginRight: 8,
+    flex: 1,
+    alignItems: 'center',
+    marginHorizontal: 2,
   },
   quickActionText: {
     color: 'rgba(255, 255, 255, 0.8)',

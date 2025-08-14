@@ -183,13 +183,11 @@ export default function ProgressDashboard({ onNavigate }: ProgressDashboardProps
         {/* Nutrition Rings */}
         <View style={styles.nutritionSection}>
           <Text style={styles.sectionTitle}>Macronutrients</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.nutritionRings}>
+          <View style={styles.nutritionRings}>
             {renderProgressRing("Protein", mockStats.protein.current, mockStats.protein.target, "#FF6B35", "g")}
             {renderProgressRing("Carbs", mockStats.carbs.current, mockStats.carbs.target, "#4ECDC4", "g")}
             {renderProgressRing("Fat", mockStats.fat.current, mockStats.fat.target, "#45B7D1", "g")}
-            {renderProgressRing("Fiber", mockStats.fiber.current, mockStats.fiber.target, "#96CEB4", "g")}
-            {renderProgressRing("Water", mockStats.water.current, mockStats.water.target, "#6C7CE7", "cups")}
-          </ScrollView>
+          </View>
         </View>
 
         {/* Eating Pattern */}
@@ -379,11 +377,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   nutritionRings: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingVertical: 8,
   },
   progressRingContainer: {
     alignItems: "center",
-    marginRight: 24,
+    flex: 1,
   },
   progressContent: {
     position: "absolute",

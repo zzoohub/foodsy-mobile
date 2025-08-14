@@ -271,9 +271,9 @@ export default function DiscoverSection({ onNavigate }: DiscoverSectionProps) {
                 <Text style={styles.seeAllText}>Browse all</Text>
               </TouchableOpacity>
             </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {mockRecipes.map(renderRecipe)}
-            </ScrollView>
+            <View style={styles.recipesContainer}>
+              {mockRecipes.slice(0, 2).map(renderRecipe)}
+            </View>
 
             {/* Recipe Categories */}
             <View style={styles.categoriesSection}>
@@ -302,13 +302,13 @@ export default function DiscoverSection({ onNavigate }: DiscoverSectionProps) {
             {/* Filter Options */}
             <View style={styles.filtersSection}>
               <Text style={styles.sectionTitle}>Filter by Cuisine</Text>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {["All", "Healthy", "Mediterranean", "Asian", "Mexican", "Italian"].map((filter, index) => (
+              <View style={styles.filtersContainer}>
+                {["All", "Healthy", "Mediterranean", "Asian"].map((filter, index) => (
                   <TouchableOpacity key={index} style={[styles.filterChip, index === 0 && styles.filterChipActive]}>
                     <Text style={[styles.filterChipText, index === 0 && styles.filterChipTextActive]}>{filter}</Text>
                   </TouchableOpacity>
                 ))}
-              </ScrollView>
+              </View>
             </View>
           </View>
         )}
@@ -482,10 +482,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   recipeCard: {
-    width: width * 0.7,
+    width: width * 0.45,
     backgroundColor: "rgba(255, 255, 255, 0.05)",
     borderRadius: 12,
-    marginRight: 12,
     overflow: "hidden",
   },
   recipeImage: {
@@ -611,10 +610,10 @@ const styles = StyleSheet.create({
   },
   filterChip: {
     backgroundColor: "rgba(255, 255, 255, 0.1)",
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 16,
-    marginRight: 8,
+    marginBottom: 8,
   },
   filterChipActive: {
     backgroundColor: "#FF6B35",
@@ -626,5 +625,14 @@ const styles = StyleSheet.create({
   },
   filterChipTextActive: {
     color: "white",
+  },
+  recipesContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  filtersContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
   },
 });

@@ -2,19 +2,15 @@ import { StatusBar } from "expo-status-bar";
 import { Stack } from "expo-router";
 import { AppProvider } from "@/containers";
 import "react-native-reanimated";
-import { useColorScheme } from "react-native";
 import "@/lib/i18n";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
-  
   return (
     <AppProvider>
       <Stack screenOptions={{ 
         headerShown: false,
-        contentStyle: { backgroundColor: isDark ? '#000000' : '#FFFFFF' },
-        animation: 'slide_from_right',
+        contentStyle: { backgroundColor: '#000000' },
+        animation: 'none',
         gestureEnabled: true,
       }}>
         {/* Onboarding Flow */}
@@ -65,7 +61,7 @@ export default function RootLayout() {
           }}
         />
       </Stack>
-      <StatusBar style={isDark ? "light" : "dark"} />
+      <StatusBar style="light" />
     </AppProvider>
   );
 }
